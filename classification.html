@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torneo RNG - Clasificación</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo" onclick="showAdminLogin()">
+                <i class="fas fa-trophy"></i>
+                Torneo RNG
+            </h1>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="register.html">Inscribirse</a></li>
+                    <li><a href="classification.html" class="active">Clasificación</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h2 class="page-title">
+                <i class="fas fa-sitemap"></i>
+                Clasificación
+            </h2>
+
+
+
+            <div class="brackets-container">
+                <!-- Elite Division -->
+                <div class="bracket-section elite">
+                    <div class="bracket-header">
+                        <h3>
+                            <i class="fas fa-crown"></i>
+                            Div Elite
+                            <span class="participant-count" id="eliteParticipantCount">0 participantes</span>
+                        </h3>
+                    </div>
+                    <div class="bracket-content" id="eliteBracket">
+                        <div class="bracket-empty">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>No hay suficientes participantes para generar bracket</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Div 1 -->
+                <div class="bracket-section div1">
+                    <div class="bracket-header">
+                        <h3>
+                            <i class="fas fa-star"></i>
+                            Div 1
+                            <span class="participant-count" id="div1ParticipantCount">0 participantes</span>
+                        </h3>
+                    </div>
+                    <div class="bracket-content" id="div1Bracket">
+                        <div class="bracket-empty">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>No hay suficientes participantes para generar bracket</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Div 2 -->
+                <div class="bracket-section div2">
+                    <div class="bracket-header">
+                        <h3>
+                            <i class="fas fa-shield-alt"></i>
+                            Div 2
+                            <span class="participant-count" id="div2ParticipantCount">0 participantes</span>
+                        </h3>
+                    </div>
+                    <div class="bracket-content" id="div2Bracket">
+                        <div class="bracket-empty">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>No hay suficientes participantes para generar bracket</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Div 3 -->
+                <div class="bracket-section div3">
+                    <div class="bracket-header">
+                        <h3>
+                            <i class="fas fa-medal"></i>
+                            Div 3
+                            <span class="participant-count" id="div3ParticipantCount">0 participantes</span>
+                        </h3>
+                    </div>
+                    <div class="bracket-content" id="div3Bracket">
+                        <div class="bracket-empty">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>No hay suficientes participantes para generar bracket</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Admin Login Modal -->
+    <div id="adminLoginModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeAdminLogin()">&times;</span>
+            <h2>Panel de Administración</h2>
+            <div class="admin-login-form">
+                <label for="adminPassword">Contraseña:</label>
+                <input type="password" id="adminPassword" placeholder="Ingresa la contraseña">
+                <button onclick="verifyAdminPassword()">Ingresar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Admin Panel Modal -->
+    <div id="adminPanelModal" class="modal" style="display: none;">
+        <div class="modal-content admin-panel">
+            <span class="close" onclick="closeAdminPanel()">&times;</span>
+            <h2>Panel de Administración</h2>
+            
+            <div class="admin-tabs">
+                <button class="tab-button active" onclick="showAdminTab('brackets')">Gestionar Brackets</button>
+                <button class="tab-button" onclick="showAdminTab('participants')">Gestionar Participantes</button>
+                <button class="tab-button" onclick="showAdminTab('generate')">Generar Brackets</button>
+                <button class="tab-button" onclick="showAdminTab('data')">Datos JSON</button>
+            </div>
+
+            <div id="bracketsTab" class="admin-tab active">
+                <h3>Gestionar Brackets por División</h3>
+                <div class="division-selector">
+                    <label for="adminDivisionSelect">Seleccionar División:</label>
+                    <select id="adminDivisionSelect" onchange="loadAdminBracket()">
+                        <option value="">Selecciona una división</option>
+                        <option value="elite">Div Elite</option>
+                        <option value="div1">Div 1</option>
+                        <option value="div2">Div 2</option>
+                        <option value="div3">Div 3</option>
+                    </select>
+                </div>
+                <div id="adminBracketEditor" class="bracket-editor">
+                    <p>Selecciona una división para editar su bracket</p>
+                </div>
+            </div>
+
+            <div id="participantsTab" class="admin-tab">
+                <h3>Gestionar Participantes</h3>
+                <div class="participants-controls">
+                    <div class="participants-stats">
+                        <div class="stat-card">
+                            <h4>Total Participantes</h4>
+                            <span id="totalParticipants">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Div Elite</h4>
+                            <span id="eliteCount">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Div 1</h4>
+                            <span id="div1Count">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Div 2</h4>
+                            <span id="div2Count">0</span>
+                        </div>
+                        <div class="stat-card">
+                            <h4>Div 3</h4>
+                            <span id="div3Count">0</span>
+                        </div>
+                    </div>
+                    
+                    <div class="participants-filter">
+                        <label for="participantDivisionFilter">Filtrar por División:</label>
+                        <select id="participantDivisionFilter" onchange="loadParticipantsList()">
+                            <option value="all">Todas las divisiones</option>
+                            <option value="elite">Div Elite</option>
+                            <option value="div1">Div 1</option>
+                            <option value="div2">Div 2</option>
+                            <option value="div3">Div 3</option>
+                        </select>
+                        <button class="btn-secondary" onclick="loadParticipantsList()">
+                            <i class="fas fa-sync"></i>
+                            Actualizar Lista
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="participantsList" class="participants-list">
+                    <p>Cargando participantes...</p>
+                </div>
+            </div>
+
+            <div id="generateTab" class="admin-tab">
+                <h3>Generar Brackets</h3>
+                <div class="generate-controls">
+                    <button class="btn-primary" onclick="generateAllBracketsAdmin()">
+                        <i class="fas fa-sync"></i>
+                        Generar Todos los Brackets
+                    </button>
+                    <button class="btn-secondary" onclick="resetAllBracketsAdmin()">
+                        <i class="fas fa-trash"></i>
+                        Reiniciar Todos los Brackets
+                    </button>
+                </div>
+                <div class="generate-status" id="generateStatus"></div>
+            </div>
+
+            <div id="dataTab" class="admin-tab">
+                <h3>Gestión de Datos JSON</h3>
+                <div class="data-controls">
+                    <div class="data-section">
+                        <h4>Exportar Datos</h4>
+                        <p>Descarga todos los datos del torneo en formato JSON</p>
+                        <div class="export-buttons">
+                            <button class="btn-primary" onclick="exportParticipantsJSON()">
+                                <i class="fas fa-download"></i>
+                                Exportar Participantes
+                            </button>
+                            <button class="btn-primary" onclick="exportBracketsJSON()">
+                                <i class="fas fa-download"></i>
+                                Exportar Brackets
+                            </button>
+                            <button class="btn-primary" onclick="exportAllDataJSON()">
+                                <i class="fas fa-download"></i>
+                                Exportar Todo
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="data-section">
+                        <h4>Importar Datos</h4>
+                        <p>Cargar datos desde archivo JSON</p>
+                        <div class="import-controls">
+                            <input type="file" id="jsonFileInput" accept=".json" style="display: none;" onchange="handleJSONImport(event)">
+                            <button class="btn-secondary" onclick="document.getElementById('jsonFileInput').click()">
+                                <i class="fas fa-upload"></i>
+                                Seleccionar Archivo JSON
+                            </button>
+                            <button class="btn-warning" onclick="clearAllData()">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Limpiar Todos los Datos
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="data-section">
+                        <h4>Vista Previa de Datos</h4>
+                        <div class="data-preview" id="dataPreview">
+                            <p>Selecciona una acción para ver los datos</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Torneo RNG. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBrackets();
+        });
+    </script>
+</body>
+</html>

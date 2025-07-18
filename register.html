@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torneo RNG - Inscripción</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo" onclick="showAdminLogin()">
+                <i class="fas fa-trophy"></i>
+                Torneo RNG
+            </h1>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="register.html" class="active">Inscribirse</a></li>
+                    <li><a href="classification.html">Clasificación</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <div class="registration-container">
+                <h2 class="page-title">
+                    <i class="fas fa-user-plus"></i>
+                    Inscripción al Torneo
+                </h2>
+                
+                <form id="registrationForm" class="registration-form">
+                    <div class="form-group">
+                        <label for="robloxUsername">
+                            <i class="fas fa-gamepad"></i>
+                            Usuario de Roblox
+                        </label>
+                        <input 
+                            type="text" 
+                            id="robloxUsername" 
+                            name="robloxUsername" 
+                            required 
+                            placeholder="Ingresa tu usuario de Roblox"
+                            maxlength="20"
+                        >
+                        <small class="form-hint">Tu nombre de usuario principal de Roblox</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="discordUsername">
+                            <i class="fab fa-discord"></i>
+                            Usuario de Discord
+                        </label>
+                        <input 
+                            type="text" 
+                            id="discordUsername" 
+                            name="discordUsername" 
+                            required 
+                            placeholder="Ingresa tu usuario de Discord"
+                            maxlength="20"
+                        >
+                        <small class="form-hint">Tu nombre de usuario de Discord</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="division">
+                            <i class="fas fa-layer-group"></i>
+                            División
+                        </label>
+                        <select id="division" name="division" required>
+                            <option value="">Selecciona tu división</option>
+                            <option value="elite">Div Elite</option>
+                            <option value="div1">Div 1</option>
+                            <option value="div2">Div 2</option>
+                            <option value="div3">Div 3</option>
+                        </select>
+                        <small class="form-hint">Selecciona la división que mejor represente tu nivel</small>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-check"></i>
+                            Inscribirse
+                        </button>
+                        <button type="button" class="btn-secondary" onclick="resetForm()">
+                            <i class="fas fa-undo"></i>
+                            Limpiar
+                        </button>
+                    </div>
+                </form>
+
+                <div id="registrationMessage" class="message" style="display: none;"></div>
+            </div>
+
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Torneo RNG. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeRegistrationForm();
+        });
+    </script>
+</body>
+</html>

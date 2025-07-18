@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torneo RNG - Participantes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <h1 class="logo">
+                <i class="fas fa-trophy"></i>
+                Torneo RNG
+            </h1>
+            <nav class="nav">
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="register.html">Inscribirse</a></li>
+                    <li><a href="participants.html" class="active">Participantes</a></li>
+                    <li><a href="classification.html">Clasificación</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <h2 class="page-title">
+                <i class="fas fa-users"></i>
+                Participantes del Torneo
+            </h2>
+
+            <div class="participants-stats">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <span id="totalParticipantsCount">0</span>
+                    <small>Total Participantes</small>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-layer-group"></i>
+                    <span id="activeDivisions">0</span>
+                    <small>Divisiones Activas</small>
+                </div>
+            </div>
+
+            <div class="participants-container">
+                <!-- Elite 1 Division -->
+                <div class="division-section elite-1">
+                    <div class="division-header">
+                        <h3>
+                            <i class="fas fa-crown"></i>
+                            Elite 1
+                            <span class="participant-count" id="elite1ParticipantCount">0</span>
+                        </h3>
+                    </div>
+                    <div class="participants-list" id="elite1Participants">
+                        <div class="empty-state">
+                            <i class="fas fa-user-slash"></i>
+                            <p>No hay participantes inscritos en esta división</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Elite 2 Division -->
+                <div class="division-section elite-2">
+                    <div class="division-header">
+                        <h3>
+                            <i class="fas fa-star"></i>
+                            Elite 2
+                            <span class="participant-count" id="elite2ParticipantCount">0</span>
+                        </h3>
+                    </div>
+                    <div class="participants-list" id="elite2Participants">
+                        <div class="empty-state">
+                            <i class="fas fa-user-slash"></i>
+                            <p>No hay participantes inscritos en esta división</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Elite 3 Division -->
+                <div class="division-section elite-3">
+                    <div class="division-header">
+                        <h3>
+                            <i class="fas fa-shield-alt"></i>
+                            Elite 3
+                            <span class="participant-count" id="elite3ParticipantCount">0</span>
+                        </h3>
+                    </div>
+                    <div class="participants-list" id="elite3Participants">
+                        <div class="empty-state">
+                            <i class="fas fa-user-slash"></i>
+                            <p>No hay participantes inscritos en esta división</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recruits Division -->
+                <div class="division-section recruits">
+                    <div class="division-header">
+                        <h3>
+                            <i class="fas fa-user-graduate"></i>
+                            Reclutas
+                            <span class="participant-count" id="recruitsParticipantCount">0</span>
+                        </h3>
+                    </div>
+                    <div class="participants-list" id="recruitsParticipants">
+                        <div class="empty-state">
+                            <i class="fas fa-user-slash"></i>
+                            <p>No hay participantes inscritos en esta división</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Torneo RNG. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadParticipants();
+        });
+    </script>
+</body>
+</html>
